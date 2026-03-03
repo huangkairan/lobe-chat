@@ -1,19 +1,21 @@
 import { cpSync, existsSync, mkdirSync } from 'node:fs';
-import { resolve } from 'node:path';
+import path from 'node:path';
 
-const root = resolve(import.meta.dirname, '..');
-const spaDir = resolve(root, 'public/spa');
+const root = path.resolve(import.meta.dirname, '..');
+const spaDir = path.resolve(root, 'public/spa');
+const distDirs = ['desktop', 'mobile'] as const;
+const copyDirs = ['assets', 'i18n', 'vendor'] as const;
 
 mkdirSync(spaDir, { recursive: true });
 
-const desktopAssets = resolve(root, 'dist/desktop/assets');
-if (existsSync(desktopAssets)) {
-  cpSync(desktopAssets, resolve(spaDir, 'assets'), { recursive: true });
-  console.log('Copied dist/desktop/assets → public/spa/assets');
-}
+for (const distDir of distDirs) {
+  for (const dir of copyDirs) {
+    const sourceDir = path.resolve(root, `dist/${distDir}/${dir}`);
+    const targetDir = path.resolve(spaDir, dir);
 
-const mobileAssets = resolve(root, 'dist/mobile/assets');
-if (existsSync(mobileAssets)) {
-  cpSync(mobileAssets, resolve(spaDir, 'assets'), { recursive: true });
-  console.log('Copied dist/mobile/assets → public/spa/assets');
+    if (!existsSync(sourceDir)) continue;
+
+    cpSync(sourceDir, targetDir, { recursive: true });
+    console.log(`Copied dist/${distDir}/${dir} -> public/spa/${dir}`);
+  }
 }
