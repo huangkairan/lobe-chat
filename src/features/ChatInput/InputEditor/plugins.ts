@@ -1,11 +1,12 @@
 import {
-  ReactCodemirrorPlugin,
   ReactCodePlugin,
+  ReactCodemirrorPlugin,
   ReactHRPlugin,
   ReactLinkHighlightPlugin,
   ReactListPlugin,
   ReactMathPlugin,
   ReactMentionPlugin,
+  ReactTablePlugin,
   ReactVirtualBlockPlugin,
 } from '@lobehub/editor';
 import { type Editor } from '@lobehub/editor/react';
@@ -34,6 +35,7 @@ export const createChatInputRichPlugins = ({
   ReactCodePlugin,
   ReactCodemirrorPlugin,
   ReactHRPlugin,
+  ReactTablePlugin,
   linkPlugin,
   ReactVirtualBlockPlugin,
   mathPlugin,
