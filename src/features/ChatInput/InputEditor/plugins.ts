@@ -1,6 +1,6 @@
 import {
-  ReactCodePlugin,
   ReactCodemirrorPlugin,
+  ReactCodePlugin,
   ReactHRPlugin,
   ReactLinkHighlightPlugin,
   ReactListPlugin,
